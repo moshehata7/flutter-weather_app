@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         title: Text("Weather App ", style: TextStyle(color: Colors.black)),
         centerTitle: true,
         actions: [
@@ -40,8 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           if (state is GetWeatherLoading) {
             return Center(child: CircularProgressIndicator());
+          } else if (state is GetWeatherFailure) {
+            return Text("somthing is wrong try again....");
           } else if (state is GetWeatherSuccess) {
-            final WeatherModel weatherData = state.weatherModel;
+            final WeatherModel weatherData = BlocProvider.of<GetWeatherCubit>(
+              context,
+            ).weatherModel!;
             return Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -59,11 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const Spacer(flex: 3),
                   Text(
-                    state.cityName  ,
+                    state.cityName,
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'updated at : ${weatherData.date?.hour.toString()}:${weatherData.date?.minute.toString()}',
+                    'updated at : ${weatherData.date.hour.toString()}:${weatherData.date.minute.toString()}',
                     style: TextStyle(fontSize: 22),
                   ),
                   Spacer(),
