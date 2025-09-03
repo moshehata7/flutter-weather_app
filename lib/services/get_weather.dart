@@ -1,14 +1,14 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:weather_app/constants.dart';
 import 'package:weather_app/models/weather_model.dart';
 
-class GetWeather {
+class GetWeatherService {
     final Dio dio;
 
-  GetWeather(this.dio);
-  Future<dynamic> getWeather() async {
-    Response response = await dio.get("http://api.weatherapi.com/v1/forecast.json?key=cea6d825185b431abb591931251807&q=London&days=7");
+  GetWeatherService(this.dio);
+  Future<dynamic> getWeather({required String cityName}) async {
+    Response response = await dio.get("http://api.weatherapi.com/v1/forecast.json?key=$kApiKey&q=$cityName&days=7");
     if (response.statusCode != 200) {
     var data  = response.data;
       throw Exception(data['error']['message']);

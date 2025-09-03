@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("There is no weather ",style: TextStyle(color: Colors.black,fontSize: 20),),
+            Text("There is no weather 😔",style: TextStyle(color: Colors.black,fontSize: 20),),
             Text("Start searching now 🔎",style: TextStyle(color: Colors.black,fontSize: 20))
           ],
         ),
